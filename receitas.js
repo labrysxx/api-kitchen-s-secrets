@@ -36,7 +36,7 @@ async function criaReceita(request, response) {
         rendimento: request.body.rendimento,
         autor: request.body.autor,
         contato: request.body.contato,
-        extra: request.body.extra
+        segredo: request.body.segredo
     })
 
     try {
@@ -88,8 +88,8 @@ async function corrigeReceita(request, response) {
             receitaEncontrada.autor = request.body.autor
         }
 
-        if(request.body.extra) {
-            receitaEncontrada.extra = request.body.extra
+        if(request.body.segredo) {
+            receitaEncontrada.segredo = request.body.segredo
         }
 
         const receitaAtualizadaNoBancoDeDados = await receitaEncontrada.save()

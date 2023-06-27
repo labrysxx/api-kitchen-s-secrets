@@ -37,7 +37,7 @@ const ReceitaSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    extra: {
+    segredo: {
         type: String,
         required: true
     }
