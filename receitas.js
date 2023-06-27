@@ -27,11 +27,16 @@ async function mostraReceitas(request, response) {
 //POST
 async function criaReceita(request, response) {
     const novaReceita = new Receita({
+        categoria: request.body.categoria,
         nome: request.body.nome,
+        descricao: request.body.descricao,
         imagem: request.body.imagem,
         ingredientes: request.body.ingredientes,
         tempo: request.body.tempo,
-        rendimento: request.body.rendimento
+        rendimento: request.body.rendimento,
+        autor: request.body.autor,
+        contato: request.body.contato,
+        extra: request.body.extra
     })
 
     try {
@@ -47,8 +52,20 @@ async function corrigeReceita(request, response) {
     try {
         const receitaEncontrada = await Receita.findById(request.params.id)
 
+        if(request.body.categoria) {
+            receitaEncontrada.categoria = request.body.categoria
+        }
+
         if(request.body.nome) {
             receitaEncontrada.nome = request.body.nome
+        }
+
+        if(request.body.contato) {
+            receitaEncontrada.contato = request.body.contato
+        }
+
+        if(request.body.descricao) {
+            receitaEncontrada.descricao = request.body.descricao
         }
 
         if(request.body.imagem) {
@@ -65,6 +82,14 @@ async function corrigeReceita(request, response) {
 
         if(request.body.rendimento) {
             receitaEncontrada.rendimento = request.body.rendimento
+        }
+
+        if(request.body.autor) {
+            receitaEncontrada.autor = request.body.autor
+        }
+
+        if(request.body.extra) {
+            receitaEncontrada.extra = request.body.extra
         }
 
         const receitaAtualizadaNoBancoDeDados = await receitaEncontrada.save()
